@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html class="scroll-smooth dark" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Baruuc Studio — Barber Studio</title>
+    <meta
+      name="description"
+      content="Baruuc Studio: barbería premium con experiencia elevada. Cortes de precisión, academy y una atmósfera de exclusividad."
+    />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                DEFAULT: "#F26522",
+                light: "#FF8A50",
+                dark: "#D4500F",
+              },
+              accent: "#E8C38D",
+              "background-light": "#F8F7F4",
+              "background-dark": "#08080A",
+              "surface-light": "#FFFFFF",
+              "surface-dark": "#131315",
+              "text-main-light": "#1A1A1A",
+              "text-main-dark": "#F0EDE8",
+              "text-sec-light": "#71706E",
+              "text-sec-dark": "#9B9A98",
+            },
+            fontFamily: {
+              sans: [
+                "Inter",
+                "-apple-system",
+                "BlinkMacSystemFont",
+                "sans-serif",
+              ],
+              display: ["Poppins", "Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "12px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+            },
+            boxShadow: {
+              apple: "0 4px 24px rgba(0,0,0,0.04)",
+              "apple-hover": "0 12px 40px rgba(0,0,0,0.10)",
+              glow: "0 0 60px rgba(242,101,34,0.15)",
+              "glow-lg": "0 0 120px rgba(242,101,34,0.12)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      * {
+        scrollbar-width: none;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      /* Grain overlay */
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 0.03;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+      /* Glass nav */
+      .glass-nav {
+        background: rgba(248, 247, 244, 0.72);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+      }
+      .dark .glass-nav {
+        background: rgba(8, 8, 10, 0.72);
+      }
+      /* Scroll reveal */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-delay-1 {
+        transition-delay: 0.12s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.24s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.36s;
+      }
+      .reveal-delay-4 {
+        transition-delay: 0.48s;
+      }
+      .reveal-delay-5 {
+        transition-delay: 0.6s;
+      }
+      /* Hero anim */
+      .hero-text {
+        opacity: 0;
+        transform: translateY(50px);
+        animation: heroIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      .hero-text-d1 {
+        animation-delay: 0.15s;
+      }
+      .hero-text-d2 {
+        animation-delay: 0.3s;
+      }
+      .hero-text-d3 {
+        animation-delay: 0.5s;
+      }
+      @keyframes heroIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      /* Scroll indicator */
+      @keyframes scrollBounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(8px);
+        }
+      }
+      .scroll-indicator {
+        animation: scrollBounce 2s ease-in-out infinite;
+      }
+      /* Card hover lift */
+      .card-lift {
+        transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          box-shadow 0.45s ease;
+      }
+      .card-lift:hover {
+        transform: translateY(-6px);
+      }
+      /* Service image zoom */
+      .service-card-image {
+        transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .service-card:hover .service-card-image {
+        transform: scale(1.08);
+      }
+      /* Glow pulse */
+      @keyframes glowPulse {
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 0.8;
+        }
+      }
+      .glow-pulse {
+        animation: glowPulse 4s ease-in-out infinite;
+      }
+      /* Horizontal marquee */
+      @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .marquee-track {
+        animation: marquee 30s linear infinite;
+      }
+      /* Gradient border */
+      .gradient-border {
+        position: relative;
+      }
+      .gradient-border::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        padding: 1px;
+        background: linear-gradient(
+          135deg,
+          rgba(242, 101, 34, 0.4),
+          transparent 50%,
+          rgba(232, 195, 141, 0.3)
+        );
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+      }
+      /* Float animation */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        33% {
+          transform: translateY(-8px) rotate(1deg);
+        }
+        66% {
+          transform: translateY(4px) rotate(-1deg);
+        }
+      }
+      .float {
+        animation: float 6s ease-in-out infinite;
+      }
+      /* Underline draw */
+      .link-underline {
+        position: relative;
+      }
+      .link-underline::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: currentColor;
+        transition: width 0.35s ease;
+      }
+      .link-underline:hover::after {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-sans antialiased transition-colors duration-500"
+  >
+    <!-- NAV -->
+    <nav
+      class="fixed top-0 w-full z-50 glass-nav border-b border-black/[.04] dark:border-white/[.06] transition-all duration-300"
+    >
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex justify-between items-center h-14">
+          <a href="#" class="flex items-center group">
+            <img
+              src="logo.jpg"
+              alt="Baruuc Studio"
+              class="h-8 rounded transition-transform group-hover:scale-105"
+            />
+          </a>
+          <div class="hidden md:flex items-center gap-10">
+            <a
+              class="link-underline text-[11px] font-medium tracking-[.18em] uppercase text-text-sec-light dark:text-text-sec-dark hover:text-text-main-light dark:hover:text-white transition-colors"
+              href="#"
+              >Studio</a
+            >
+            <a
+              class="link-underline text-[11px] font-medium tracking-[.18em] uppercase text-text-sec-light dark:text-text-sec-dark hover:text-text-main-light dark:hover:text-white transition-colors"
+              href="#services"
+              >Servicios</a
+            >
+            <a
+              class="link-underline text-[11px] font-medium tracking-[.18em] uppercase text-text-sec-light dark:text-text-sec-dark hover:text-text-main-light dark:hover:text-white transition-colors"
+              href="#academy"
+              >Academy</a
+            >
+            <a
+              class="link-underline text-[11px] font-medium tracking-[.18em] uppercase text-text-sec-light dark:text-text-sec-dark hover:text-text-main-light dark:hover:text-white transition-colors"
+              href="#contact"
+              >Contacto</a
+            >
+          </div>
+          <div class="hidden md:flex items-center gap-5">
+            <button
+              class="p-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/5 text-text-sec-light dark:text-text-sec-dark hover:text-text-main-light dark:hover:text-white transition-all"
+              onclick="document.documentElement.classList.toggle('dark')"
+            >
+              <span class="material-symbols-outlined text-[18px]"
+                >dark_mode</span
+              >
+            </button>
+            <a
+              class="bg-text-main-light dark:bg-white hover:bg-primary text-white dark:text-black dark:hover:text-white text-[11px] font-semibold py-2.5 px-6 rounded-full transition-all duration-300 tracking-wider hover:shadow-glow"
+              href="#contact"
+              >Reservar</a
+            >
+          </div>
+          <button
+            class="md:hidden p-2"
+            id="mobileMenuBtn"
+            onclick="document.getElementById('mobileMenu').classList.toggle('translate-x-full')"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!-- MOBILE MENU -->
+    <div
+      id="mobileMenu"
+      class="fixed inset-0 z-[60] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 translate-x-full transition-transform duration-500 ease-out"
+    >
+      <button
+        class="absolute top-5 right-6 p-2"
+        onclick="document.getElementById('mobileMenu').classList.add('translate-x-full')"
+      >
+        <span class="material-symbols-outlined text-2xl">close</span>
+      </button>
+      <a
+        class="text-2xl font-light tracking-widest uppercase hover:text-primary transition-colors"
+        href="#"
+        onclick="document.getElementById('mobileMenu').classList.add('translate-x-full')"
+        >Studio</a
+      >
+      <a
+        class="text-2xl font-light tracking-widest uppercase hover:text-primary transition-colors"
+        href="#services"
+        onclick="document.getElementById('mobileMenu').classList.add('translate-x-full')"
+        >Servicios</a
+      >
+      <a
+        class="text-2xl font-light tracking-widest uppercase hover:text-primary transition-colors"
+        href="#academy"
+        onclick="document.getElementById('mobileMenu').classList.add('translate-x-full')"
+        >Academy</a
+      >
+      <a
+        class="text-2xl font-light tracking-widest uppercase hover:text-primary transition-colors"
+        href="#contact"
+        onclick="document.getElementById('mobileMenu').classList.add('translate-x-full')"
+        >Contacto</a
+      >
+      <a
+        class="mt-4 bg-primary text-white font-semibold py-3 px-10 rounded-full"
+        href="#contact"
+        onclick="document.getElementById('mobileMenu').classList.add('translate-x-full')"
+        >Reservar</a
+      >
+    </div>
+    <!-- HERO -->
+    <section
+      class="relative h-screen flex items-center justify-center overflow-hidden"
+    >
+      <div class="absolute inset-0 z-0">
+        <img
+          alt="Master barber cutting hair"
+          class="w-full h-full object-cover brightness-[0.35] dark:brightness-[0.25] scale-105"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkgg7PmaDczDA6b7bygCO3dLs5IEh0QemkSJrc-28g1RzjmIwwr_ZYfs5p-dgugW8-gDXnhM9UJxtzkcEwoYE0RffM4WfTC_ITJ3Vy_Z6ZsoDpNzd3H7XTZMamOOCH9HjRx8vcknArodv2YOTjcxAKoQOouHU3rEq9kb_GOVXqI3pNUMJDIiXPtEgOO-xIiZJzrkgYMD-NWrMjp1sYYb1P1sRRky6KuyZb5cKXYLirioSWiIhr3Inj89j1AVhY1O5SYy7ubR98XU8"
+        />
+      </div>
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-background-light dark:from-background-dark via-transparent to-black/30 z-[1]"
+      ></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/20 z-[1]"
+      ></div>
+      <!-- Ambient glow -->
+      <div
+        class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] glow-pulse z-[1]"
+      ></div>
+      <div
+        class="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-accent/10 rounded-full blur-[100px] glow-pulse z-[1]"
+        style="animation-delay: 2s"
+      ></div>
+      <!-- Content -->
+      <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+        <div class="hero-text mb-5">
+          <span
+            class="inline-block text-[11px] font-semibold tracking-[.4em] uppercase text-primary border border-primary/20 rounded-full py-2 px-6 backdrop-blur-sm bg-white/5"
+            >Barber Studio</span
+          >
+        </div>
+        <h1
+          class="hero-text hero-text-d1 text-5xl md:text-7xl lg:text-[6.5rem] font-display font-bold tracking-tight text-white mb-6 leading-[1.05]"
+        >
+          Baruuc
+          <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-400 to-accent"
+            >Studio</span
+          >
+        </h1>
+        <p
+          class="hero-text hero-text-d2 text-lg md:text-xl text-gray-300/90 font-light mb-14 max-w-2xl mx-auto leading-relaxed"
+        >
+          Artesanía de precisión. Una experiencia de barbería elevada para el
+          hombre que define su propio estándar.
+        </p>
+        <div
+          class="hero-text hero-text-d3 flex flex-col sm:flex-row gap-4 justify-center items-center"
+        >
+          <a
+            class="group inline-flex h-[52px] items-center justify-center rounded-full bg-white px-9 font-medium text-black transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-glow min-w-[200px]"
+            href="#services"
+          >
+            <span class="mr-2 text-sm tracking-wide">Descubrir Servicios</span>
+            <span
+              class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1"
+              >arrow_forward</span
+            >
+          </a>
+          <a
+            class="group inline-flex h-[52px] items-center justify-center rounded-full border border-white/25 bg-white/[.06] backdrop-blur-md px-9 font-medium text-white transition-all duration-300 hover:bg-white/15 hover:border-white/40 min-w-[200px]"
+            href="#academy"
+          >
+            <span class="text-sm tracking-wide">Academy 2026</span>
+          </a>
+        </div>
+      </div>
+      <!-- Scroll indicator -->
+      <div
+        class="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 scroll-indicator flex flex-col items-center"
+      >
+        <div
+          class="w-[1px] h-10 bg-gradient-to-b from-transparent via-white/60 to-transparent"
+        ></div>
+        <span
+          class="block text-[9px] text-white/50 tracking-[.3em] uppercase mt-2"
+          >Scroll</span
+        >
+      </div>
+    </section>
+    <!-- Marquee strip -->
+    <div
+      class="py-5 bg-surface-light dark:bg-surface-dark border-y border-black/[.04] dark:border-white/[.04] overflow-hidden"
+    >
+      <div class="flex whitespace-nowrap marquee-track">
+        <span
+          class="mx-8 text-[11px] font-medium tracking-[.15em] uppercase text-text-sec-light/70 dark:text-text-sec-dark/70"
+          >★ +500 Clientes Satisfechos</span
+        >
+        <span
+          class="mx-8 text-[11px] font-medium tracking-[.15em] uppercase text-text-sec-light/70 dark:text-text-sec-dark/70"
+          >★ Barbería #1 CDMX</span
+        >
+        <span
+          class="mx-8 text-[11px] font-medium tracking-[.15em] uppercase text-text-sec-light/70 dark:text-text-sec-dark/70"
+          >★ 4.9 Estrellas Google</span
+        >
+        <span
+          class="mx-8 text-[11px] font-medium tracking-[.15em] uppercase text-text-sec-light/70 dark:text-text-sec-dark/70"
+          >★ Masterclass Certificada</span
+        >
+        <span
+          class="mx-8 text-[11px] font-medium tracking-[.15em] uppercase text-text-sec-light/70 dark:text-text-sec-dark/70"
+          >★ Premium Experience</span
+        >
+        <span
+          class="mx-8 text-[11px] font-medium tracking-[.15em] uppercase text-text-sec-light/70 dark:text-text-sec-dark/70"
+          >★ +500 Clientes Satisfechos</span
+        >
+        <span
+          class="mx-8 text-[11px] font-medium tracking-[.15em] uppercase text-text-sec-light/70 dark:text-text-sec-dark/70"
+          >★ Barbería #1 CDMX</span
+        >
+        <span
+          class="mx-8 text-[11px] font-medium tracking-[.15em] uppercase text-text-sec-light/70 dark:text-text-sec-dark/70"
+          >★ 4.9 Estrellas Google</span
+        >
+        <span
+          class="mx-8 text-[11px] font-medium tracking-[.15em] uppercase text-text-sec-light/70 dark:text-text-sec-dark/70"
+          >★ Masterclass Certificada</span
+        >
+        <span
+          class="mx-8 text-[11px] font-medium tracking-[.15em] uppercase text-text-sec-light/70 dark:text-text-sec-dark/70"
+          >★ Premium Experience</span
+        >
+      </div>
+    </div>
+    <section class="py-32 bg-background-light dark:bg-background-dark">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center gap-20 lg:gap-32">
+          <div class="md:w-5/12 order-2 md:order-1 reveal">
+            <h2
+              class="text-xs font-semibold text-primary tracking-[0.2em] uppercase mb-4 pl-1"
+            >
+              Filosofía
+            </h2>
+            <h3
+              class="text-4xl md:text-5xl font-display font-bold text-text-main-light dark:text-white mb-8 tracking-tight leading-tight"
+            >
+              Redefiniendo<br />la
+              <em class="text-primary not-italic">excelencia</em>.
+            </h3>
+            <p
+              class="text-lg text-text-sec-light dark:text-text-sec-dark font-light leading-relaxed mb-6"
+            >
+              En Baruuc, la barbería trasciende el simple acto de cortar
+              cabello. Es un ritual de refinamiento personal. Fusionamos la
+              precisión técnica de la vieja escuela con una visión estética
+              contemporánea y minimalista.
+            </p>
+            <p
+              class="text-lg text-text-sec-light dark:text-text-sec-dark font-light leading-relaxed mb-10"
+            >
+              Nuestro espacio está diseñado para desconectar del ruido exterior
+              y reconectar con tu mejor versión. Cada detalle, desde la
+              iluminación hasta la música, está curado para ofrecer una
+              atmósfera de exclusividad.
+            </p>
+            <a
+              class="inline-flex items-center text-text-main-light dark:text-white text-sm font-medium hover:text-primary transition-colors group border-b border-gray-300 dark:border-gray-700 pb-1"
+              href="#"
+            >
+              Conoce a nuestros maestros
+              <span
+                class="material-symbols-outlined ml-2 text-sm transform group-hover:translate-x-1 transition-transform"
+                >arrow_forward</span
+              >
+            </a>
+          </div>
+          <div class="md:w-7/12 order-1 md:order-2 grid grid-cols-2 gap-6">
+            <div class="space-y-6 mt-12">
+              <img
+                alt="Barber tools minimalist"
+                class="rounded-[2rem] shadow-apple w-full h-80 object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOBl7GApv2dfqMtCzN6dz556bJYTuuPKoGOs3iGbLnMz_d2rJk40yKKxq-GVbF61RN4a-7-ospbKy768ZnM6K3V64k8Z4-FyxrBwr_pkMzRzR2CjZpgP0sSjJFEEUeQJ7qK7jp6C1vpx9o_Iod0AmPIaMvShyYJ7pSviE5-5lLQaPxipMgVPml6T7v1Rn4ZmXcaUV31VUC2MkDsmQnSELi2lF8xfLIkKXjUMPh5Xk6mhoDrWWQzkPLmjy7TC0jUC8VOoZwaTWcD1E"
+              />
+              <img
+                alt="Detailed haircut closeup"
+                class="rounded-[2rem] shadow-apple w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSRF1pk-251JBMqkXZ5hG971dhAiKl2N2s25_ISCPvyyY_WDlRDw3cp5fUjjdWC0EEznZ5y6m3WasHELGblFsy2btMGgwxwuny1SvHs14vgZqzOlX7eY0dqv9UtCaK_GFv9Dgxf-slDGk6WFZ_kUVpVLeDDRg4at9PesU1UFJ4bphhcvsfC-qTo9MwSLdrjFFqYpy4Fmd3S-ggey70_FoAbKqKIbG2E7VhBzT0H5QB7GkDv1ZkDGVTBsoHzwe_-deo-DN2ucoxDpU"
+              />
+            </div>
+            <div class="space-y-6">
+              <img
+                alt="Barber shop interior modern"
+                class="rounded-[2rem] shadow-apple w-full h-64 object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9iwjLDsQIDSnMqbBdRtfrC5n64gVWRHYo45qucJA3OKZQOcNLoDI-GNajqBWh-itENKaDYIifM6I4Hh-tw9Qj0SGTE7LZ_uX20-Lig6cCnLsUjrE2EIbYBqGZCm42h9o80N5ouxkDuSzSshWPihHEE5m0-V3zALmmkk5piNfkC4IrsFF496JXJgyFakhkDcCkHMle98udLHLxDzgqdgw9G7ncdnf3BSgzdt-DUfzbA89MVYDa3joAzUNisy8O-ZVrVfMisgrz7Q4"
+              />
+              <img
+                alt="Barber styling hair"
+                class="rounded-[2rem] shadow-apple w-full h-80 object-cover grayscale hover:grayscale-0 transition-all duration-700 ease-out"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYa5BEjhu7bLonJAN-Q53EBpsTIWb2jBuh3B6GrPdrljL9ijESpeRJjwyG01S3XeWveOBc5jOP_5ieB8GGKnxmtJ8dGFldQ8XQzPhtinREM-4IWcs4oAMBZnPaOfEU8U6PytSr6ItvGvrR71hzVRFvZPYV1SEMNWV-XwrW66Y6r0VcKRRJlmfEOjfQxMImM_RtQVc_kC0D4FYJHqJwdqi4OxkIGu-cD0xSMLq-H-ol-NQJvyycrDbaNDEnZ2_4qcDGuhlhS6_bL-w"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="py-32 bg-surface-dark text-white relative overflow-hidden"
+      id="academy"
+    >
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-gray-800/40 via-background-dark to-background-dark z-0"
+      ></div>
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+        <div class="text-center mb-24 fade-in-up">
+          <h2
+            class="text-5xl md:text-7xl font-bold mb-4 tracking-tighter text-white"
+          >
+            Baruuc <span class="font-light text-gray-400">Academy</span>
+          </h2>
+          <p
+            class="text-xl text-gray-400 max-w-2xl mx-auto font-light tracking-wide"
+          >
+            Formación de élite y seminarios exclusivos para la próxima
+            generación de barberos.
+          </p>
+        </div>
+        <div
+          class="bg-gradient-to-b from-[#1c1c1e] to-[#121214] rounded-[2.5rem] p-1 border border-white/5 shadow-2xl"
+        >
+          <div
+            class="grid lg:grid-cols-2 gap-0 overflow-hidden rounded-[2.3rem]"
+          >
+            <div
+              class="relative min-h-[600px] flex flex-col justify-between p-10 lg:p-14 overflow-hidden group"
+            >
+              <img
+                alt="Student learning barbering"
+                class="absolute inset-0 w-full h-full object-cover opacity-40 transition-transform duration-1000 group-hover:scale-105"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaaJyHYqJQ4QwN9r7kQLQgQtTTHkltvbmifN09FuOfpYk57roU3sLig1MsrdJyuOAwi_nhzPTeMYLM75Y0cu3C1n2H3SyLWVQBE1JFa2E00pIhQ-CFYToDebQv64B_dx9pEIFcnY_9XkDNEn5IpRlgi5OVz9tigiP8tD08iCgxDF5pekmdh9zLqEe70WIkrCUiQj4PH8pNHyiN_uekgLJLSpF0z_qE6x8X_tq9x19Y64mL7MtFo2faC01SVU-ZSowhQlp2MN4QMBs"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"
+              ></div>
+              <div class="relative z-10">
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span
+                    class="inline-block py-1.5 px-4 rounded-full bg-primary/90 text-white text-[10px] font-bold uppercase tracking-widest shadow-glow-primary"
+                  >
+                    Inscripciones Abiertas
+                  </span>
+                  <span
+                    class="inline-block py-1.5 px-4 rounded-full bg-white/10 text-white text-[10px] font-bold uppercase tracking-widest backdrop-blur-md"
+                  >
+                    Nuevos Seminarios
+                  </span>
+                </div>
+                <h3 class="text-4xl font-bold text-white mb-2 leading-tight">
+                  Barbering<br />Fundamentals
+                </h3>
+                <p class="text-lg text-gray-300 font-light">
+                  Programa Intensivo • Certificado
+                </p>
+              </div>
+              <div class="relative z-10 grid grid-cols-2 gap-8 mt-12">
+                <div>
+                  <p
+                    class="text-xs text-gray-400 uppercase tracking-widest mb-1"
+                  >
+                    Inicio
+                  </p>
+                  <p class="text-2xl font-semibold text-white">Marzo 2026</p>
+                </div>
+                <div>
+                  <p
+                    class="text-xs text-gray-400 uppercase tracking-widest mb-1"
+                  >
+                    Duración
+                  </p>
+                  <p class="text-2xl font-semibold text-white">6 Meses</p>
+                </div>
+                <div class="col-span-2 pt-8 border-t border-white/10">
+                  <ul class="space-y-3">
+                    <li
+                      class="flex items-center text-gray-300 font-light text-sm"
+                    >
+                      <span
+                        class="material-symbols-outlined text-primary mr-3 text-lg"
+                        >check_circle</span
+                      >
+                      Kit de herramientas profesionales incluido
+                    </li>
+                    <li
+                      class="flex items-center text-gray-300 font-light text-sm"
+                    >
+                      <span
+                        class="material-symbols-outlined text-primary mr-3 text-lg"
+                        >check_circle</span
+                      >
+                      Prácticas supervisadas con modelos reales
+                    </li>
+                    <li
+                      class="flex items-center text-gray-300 font-light text-sm"
+                    >
+                      <span
+                        class="material-symbols-outlined text-primary mr-3 text-lg"
+                        >check_circle</span
+                      >
+                      Mentoría de negocio y marca personal
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="bg-[#161618] p-10 lg:p-14 flex flex-col justify-center">
+              <div class="mb-10">
+                <h4 class="text-2xl font-semibold text-white mb-2">
+                  Aplica al programa
+                </h4>
+                <p class="text-gray-400 font-light text-sm">
+                  Completa el formulario para iniciar tu proceso de admisión.
+                </p>
+              </div>
+              <form class="space-y-5">
+                <div class="group">
+                  <label
+                    class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2 group-focus-within:text-primary transition-colors"
+                    for="name"
+                    >Nombre Completo</label
+                  >
+                  <input
+                    class="w-full bg-[#1c1c1e] border border-white/10 focus:border-primary/50 focus:ring-0 rounded-xl px-4 py-3.5 text-white placeholder-gray-600 transition-all text-sm font-light"
+                    id="name"
+                    placeholder="Ej. Juan Pérez"
+                    type="text"
+                  />
+                </div>
+                <div class="group">
+                  <label
+                    class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2 group-focus-within:text-primary transition-colors"
+                    for="email"
+                    >Email</label
+                  >
+                  <input
+                    class="w-full bg-[#1c1c1e] border border-white/10 focus:border-primary/50 focus:ring-0 rounded-xl px-4 py-3.5 text-white placeholder-gray-600 transition-all text-sm font-light"
+                    id="email"
+                    placeholder="hola@ejemplo.com"
+                    type="email"
+                  />
+                </div>
+                <div class="group">
+                  <label
+                    class="block text-xs font-medium text-gray-500 uppercase tracking-wider mb-2 group-focus-within:text-primary transition-colors"
+                    for="phone"
+                    >Teléfono</label
+                  >
+                  <input
+                    class="w-full bg-[#1c1c1e] border border-white/10 focus:border-primary/50 focus:ring-0 rounded-xl px-4 py-3.5 text-white placeholder-gray-600 transition-all text-sm font-light"
+                    id="phone"
+                    placeholder="(55) 1234 5678"
+                    type="tel"
+                  />
+                </div>
+                <button
+                  class="w-full mt-4 bg-white text-black hover:bg-gray-200 font-medium py-4 rounded-xl transition-all flex justify-center items-center gap-2 group text-sm tracking-wide"
+                  type="button"
+                >
+                  Enviar Solicitud
+                  <span
+                    class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform"
+                    >arrow_forward</span
+                  >
+                </button>
+              </form>
+              <p class="text-center text-[10px] text-gray-600 mt-6">
+                Cupos limitados. La selección se realiza tras una entrevista
+                personal.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="py-32 bg-background-light dark:bg-black" id="services">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="mb-20 text-center md:text-left reveal">
+          <h2
+            class="text-4xl md:text-5xl font-display font-bold text-text-main-light dark:text-white mb-4 tracking-tight"
+          >
+            Experiencias <em class="text-primary not-italic">Signature</em>
+          </h2>
+          <p
+            class="text-text-sec-light dark:text-text-sec-dark font-light text-lg mt-4 max-w-xl"
+          >
+            Cada servicio es una experiencia diseñada para tu bienestar.
+          </p>
+          <div
+            class="w-14 h-0.5 bg-gradient-to-r from-primary to-accent mx-auto md:mx-0 mt-6"
+          ></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="service-card group bg-white dark:bg-[#111111] rounded-[24px] overflow-hidden shadow-apple transition-all duration-300 hover:shadow-apple-hover flex flex-col h-full border border-gray-100 dark:border-white/5"
+          >
+            <div
+              class="relative w-full h-64 overflow-hidden bg-gray-100 dark:bg-[#1a1a1a]"
+            >
+              <img
+                alt="Classic haircut styling"
+                class="service-card-image w-full h-full object-cover opacity-90 group-hover:opacity-100"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkpOYNZ7hjtLCkMHM2CmEngBte7T-fbPLrP8nxjs5I-X9O-0n6RitBn_tUJH6b-Is4f6-0IZGL8tPOer_Ni5d3Uw-a-jKU4LMABCfThFSFJY7FRCwC2FJsWBq5AuXXA-I3Qc8zNTYSpkYJAJgATqhMIqnXfPHg6pJq5Kfg0pOvMZCirvJFB5gwZG8v760LoKtmPkWug6sdwWH371rOIh4Xh-TPOVqlBTBgw9RFAW7-cMy9GuOc74cyxP1iUh1gCCDK8cV9aQSUipE"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"
+              ></div>
+              <div
+                class="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20"
+              >
+                $200
+              </div>
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <div class="mb-4">
+                <span
+                  class="text-xs font-semibold text-primary uppercase tracking-widest mb-2 block"
+                  >Tradicional</span
+                >
+                <h3
+                  class="text-2xl font-medium text-text-main-light dark:text-white mb-2"
+                >
+                  Corte Clásico
+                </h3>
+                <p
+                  class="text-sm text-text-sec-light dark:text-text-sec-dark font-light leading-relaxed"
+                >
+                  Corte de cabello tradicional con tijera y máquina. Incluye
+                  lavado, peinado y bebida de cortesía.
+                </p>
+              </div>
+              <div
+                class="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between"
+              >
+                <span
+                  class="text-xs text-text-sec-light dark:text-text-sec-dark font-medium"
+                  >45 min</span
+                >
+                <button
+                  class="text-sm font-medium text-text-main-light dark:text-white hover:text-primary transition-colors flex items-center gap-1 group/btn"
+                >
+                  Reservar
+                  <span
+                    class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-0.5 transition-transform"
+                    >arrow_forward</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="service-card group bg-white dark:bg-[#111111] rounded-[24px] overflow-hidden shadow-apple transition-all duration-300 hover:shadow-apple-hover flex flex-col h-full border border-gray-100 dark:border-white/5"
+          >
+            <div
+              class="relative w-full h-64 overflow-hidden bg-gray-100 dark:bg-[#1a1a1a]"
+            >
+              <img
+                alt="Man with taper fade haircut"
+                class="service-card-image w-full h-full object-cover opacity-90 group-hover:opacity-100"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKVW6g1ed15ZfwBcEc5ohvTBU3kgq1IaaGimtewPFelSl8N_6KUsPjQ1lZpcQxFkjONiSc9mAPb3Ss7dIahwWcKX_tF-2nrMuxKqWmw_Mm7wpuU_LR6VCQDfLQJiRAzEFo3gwhPhjQivYes3PS26SbWR_BeEnaC7-Lp7pq0DudzYYfGlkQ7Vt70JsWi763N0_h1KV7XQ2RHdqSnVqem5Ck5swV0-XkIur-KriqRaEjDKVtPTwqsd-5UMWiyjZIKoWm4kngcDyUMyQ"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"
+              ></div>
+              <div
+                class="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20"
+              >
+                $230
+              </div>
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <div class="mb-4">
+                <span
+                  class="text-xs font-semibold text-primary uppercase tracking-widest mb-2 block"
+                  >Tendencia</span
+                >
+                <h3
+                  class="text-2xl font-medium text-text-main-light dark:text-white mb-2"
+                >
+                  Taper Fade
+                </h3>
+                <p
+                  class="text-sm text-text-sec-light dark:text-text-sec-dark font-light leading-relaxed"
+                >
+                  Degradado bajo en patillas y nuca, manteniendo volumen.
+                  Estilizado moderno para un look limpio y versátil.
+                </p>
+              </div>
+              <div
+                class="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between"
+              >
+                <span
+                  class="text-xs text-text-sec-light dark:text-text-sec-dark font-medium"
+                  >50 min</span
+                >
+                <button
+                  class="text-sm font-medium text-text-main-light dark:text-white hover:text-primary transition-colors flex items-center gap-1 group/btn"
+                >
+                  Reservar
+                  <span
+                    class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-0.5 transition-transform"
+                    >arrow_forward</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="service-card group bg-white dark:bg-[#111111] rounded-[24px] overflow-hidden shadow-apple transition-all duration-300 hover:shadow-apple-hover flex flex-col h-full border border-gray-100 dark:border-white/5"
+          >
+            <div
+              class="relative w-full h-64 overflow-hidden bg-gray-100 dark:bg-[#1a1a1a]"
+            >
+              <img
+                alt="Modern mohawk haircut style"
+                class="service-card-image w-full h-full object-cover opacity-90 group-hover:opacity-100"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYa5BEjhu7bLonJAN-Q53EBpsTIWb2jBuh3B6GrPdrljL9ijESpeRJjwyG01S3XeWveOBc5jOP_5ieB8GGKnxmtJ8dGFldQ8XQzPhtinREM-4IWcs4oAMBZnPaOfEU8U6PytSr6ItvGvrR71hzVRFvZPYV1SEMNWV-XwrW66Y6r0VcKRRJlmfEOjfQxMImM_RtQVc_kC0D4FYJHqJwdqi4OxkIGu-cD0xSMLq-H-ol-NQJvyycrDbaNDEnZ2_4qcDGuhlhS6_bL-w"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"
+              ></div>
+              <div
+                class="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20"
+              >
+                $240
+              </div>
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <div class="mb-4">
+                <span
+                  class="text-xs font-semibold text-primary uppercase tracking-widest mb-2 block"
+                  >Estilo Urbano</span
+                >
+                <h3
+                  class="text-2xl font-medium text-text-main-light dark:text-white mb-2"
+                >
+                  Mohawk/Burst Fade
+                </h3>
+                <p
+                  class="text-sm text-text-sec-light dark:text-text-sec-dark font-light leading-relaxed"
+                >
+                  Corte audaz con degradado circular alrededor de la oreja.
+                  Ideal para texturas rizadas o lisas con actitud.
+                </p>
+              </div>
+              <div
+                class="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between"
+              >
+                <span
+                  class="text-xs text-text-sec-light dark:text-text-sec-dark font-medium"
+                  >60 min</span
+                >
+                <button
+                  class="text-sm font-medium text-text-main-light dark:text-white hover:text-primary transition-colors flex items-center gap-1 group/btn"
+                >
+                  Reservar
+                  <span
+                    class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-0.5 transition-transform"
+                    >arrow_forward</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="service-card group bg-white dark:bg-[#111111] rounded-[24px] overflow-hidden shadow-apple transition-all duration-300 hover:shadow-apple-hover flex flex-col h-full border border-gray-100 dark:border-white/5"
+          >
+            <div
+              class="relative w-full h-64 overflow-hidden bg-gray-100 dark:bg-[#1a1a1a]"
+            >
+              <img
+                alt="Sharp fade haircut detail"
+                class="service-card-image w-full h-full object-cover opacity-90 group-hover:opacity-100"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSRF1pk-251JBMqkXZ5hG971dhAiKl2N2s25_ISCPvyyY_WDlRDw3cp5fUjjdWC0EEznZ5y6m3WasHELGblFsy2btMGgwxwuny1SvHs14vgZqzOlX7eY0dqv9UtCaK_GFv9Dgxf-slDGk6WFZ_kUVpVLeDDRg4at9PesU1UFJ4bphhcvsfC-qTo9MwSLdrjFFqYpy4Fmd3S-ggey70_FoAbKqKIbG2E7VhBzT0H5QB7GkDv1ZkDGVTBsoHzwe_-deo-DN2ucoxDpU"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"
+              ></div>
+              <div
+                class="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20"
+              >
+                $250
+              </div>
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <div class="mb-4">
+                <span
+                  class="text-xs font-semibold text-primary uppercase tracking-widest mb-2 block"
+                  >Precisión</span
+                >
+                <h3
+                  class="text-2xl font-medium text-text-main-light dark:text-white mb-2"
+                >
+                  Fade PRO
+                </h3>
+                <p
+                  class="text-sm text-text-sec-light dark:text-text-sec-dark font-light leading-relaxed"
+                >
+                  Nuestro degradado más detallado. Skin fade, navaja, perfilado
+                  de cejas y aplicación de productos premium.
+                </p>
+              </div>
+              <div
+                class="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between"
+              >
+                <span
+                  class="text-xs text-text-sec-light dark:text-text-sec-dark font-medium"
+                  >60 min</span
+                >
+                <button
+                  class="text-sm font-medium text-text-main-light dark:text-white hover:text-primary transition-colors flex items-center gap-1 group/btn"
+                >
+                  Reservar
+                  <span
+                    class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-0.5 transition-transform"
+                    >arrow_forward</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="service-card group bg-white dark:bg-[#111111] rounded-[24px] overflow-hidden shadow-apple transition-all duration-300 hover:shadow-apple-hover flex flex-col h-full border border-gray-100 dark:border-white/5"
+          >
+            <div
+              class="relative w-full h-64 overflow-hidden bg-gray-100 dark:bg-[#1a1a1a]"
+            >
+              <img
+                alt="Beard trimming and grooming"
+                class="service-card-image w-full h-full object-cover opacity-90 group-hover:opacity-100"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOBl7GApv2dfqMtCzN6dz556bJYTuuPKoGOs3iGbLnMz_d2rJk40yKKxq-GVbF61RN4a-7-ospbKy768ZnM6K3V64k8Z4-FyxrBwr_pkMzRzR2CjZpgP0sSjJFEEUeQJ7qK7jp6C1vpx9o_Iod0AmPIaMvShyYJ7pSviE5-5lLQaPxipMgVPml6T7v1Rn4ZmXcaUV31VUC2MkDsmQnSELi2lF8xfLIkKXjUMPh5Xk6mhoDrWWQzkPLmjy7TC0jUC8VOoZwaTWcD1E"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-60"
+              ></div>
+              <div
+                class="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/20"
+              >
+                $120
+              </div>
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+              <div class="mb-4">
+                <span
+                  class="text-xs font-semibold text-primary uppercase tracking-widest mb-2 block"
+                  >Cuidado Facial</span
+                >
+                <h3
+                  class="text-2xl font-medium text-text-main-light dark:text-white mb-2"
+                >
+                  Arreglo de Barba
+                </h3>
+                <p
+                  class="text-sm text-text-sec-light dark:text-text-sec-dark font-light leading-relaxed"
+                >
+                  Perfilado con navaja, recorte con máquina/tijera, toalla
+                  caliente y aceites hidratantes.
+                </p>
+              </div>
+              <div
+                class="mt-auto pt-4 border-t border-gray-100 dark:border-white/5 flex items-center justify-between"
+              >
+                <span
+                  class="text-xs text-text-sec-light dark:text-text-sec-dark font-medium"
+                  >30 min</span
+                >
+                <button
+                  class="text-sm font-medium text-text-main-light dark:text-white hover:text-primary transition-colors flex items-center gap-1 group/btn"
+                >
+                  Reservar
+                  <span
+                    class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-0.5 transition-transform"
+                    >arrow_forward</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="service-card group bg-black rounded-[24px] overflow-hidden shadow-apple transition-all duration-300 hover:shadow-apple-hover flex flex-col h-full border border-gray-800 relative"
+          >
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-gray-900 to-black z-0"
+            ></div>
+            <div class="relative z-10 w-full h-64 overflow-hidden">
+              <img
+                alt="Premium barber experience package"
+                class="service-card-image w-full h-full object-cover opacity-80 group-hover:opacity-90 grayscale"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9iwjLDsQIDSnMqbBdRtfrC5n64gVWRHYo45qucJA3OKZQOcNLoDI-GNajqBWh-itENKaDYIifM6I4Hh-tw9Qj0SGTE7LZ_uX20-Lig6cCnLsUjrE2EIbYBqGZCm42h9o80N5ouxkDuSzSshWPihHEE5m0-V3zALmmkk5piNfkC4IrsFF496JXJgyFakhkDcCkHMle98udLHLxDzgqdgw9G7ncdnf3BSgzdt-DUfzbA89MVYDa3joAzUNisy8O-ZVrVfMisgrz7Q4"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
+              ></div>
+              <div
+                class="absolute top-4 right-4 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full shadow-lg"
+              >
+                $320
+              </div>
+            </div>
+            <div class="p-8 flex flex-col flex-grow relative z-10">
+              <div class="mb-4">
+                <span
+                  class="text-xs font-semibold text-primary uppercase tracking-widest mb-2 block"
+                  >Experiencia Completa</span
+                >
+                <h3 class="text-2xl font-medium text-white mb-2">
+                  Paquete Premium
+                </h3>
+                <p class="text-sm text-gray-400 font-light leading-relaxed">
+                  La combinación perfecta: Corte a elección + Arreglo de barba
+                  completo + Masaje capilar + Bebida premium.
+                </p>
+              </div>
+              <div
+                class="mt-auto pt-4 border-t border-gray-800 flex items-center justify-between"
+              >
+                <span class="text-xs text-gray-500 font-medium">90 min</span>
+                <button
+                  class="text-sm font-medium text-white hover:text-primary transition-colors flex items-center gap-1 group/btn"
+                >
+                  Reservar
+                  <span
+                    class="material-symbols-outlined text-[16px] group-hover/btn:translate-x-0.5 transition-transform"
+                    >arrow_forward</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section
+      class="py-32 bg-background-light dark:bg-background-dark overflow-hidden border-t border-gray-100 dark:border-white/5"
+    >
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-20 reveal">
+          <h2
+            class="text-4xl md:text-5xl font-display font-bold text-text-main-light dark:text-white mb-4 tracking-tight"
+          >
+            Voces de la <em class="text-primary not-italic">comunidad</em>
+          </h2>
+          <p
+            class="text-text-sec-light dark:text-text-sec-dark font-light text-lg mt-4"
+          >
+            Lo que dicen quienes confían en nosotros.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div
+            class="bg-white dark:bg-[#111111] p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-white/5 hover:border-gray-200 dark:hover:border-white/10 transition-all card-lift reveal"
+          >
+            <div class="flex items-center gap-1 text-primary mb-6 text-xs">
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+            </div>
+            <p
+              class="text-text-sec-light dark:text-text-sec-dark text-sm font-light leading-relaxed mb-8"
+            >
+              "La atmósfera es inigualable. No es solo un corte de pelo, es un
+              momento de pausa en mi semana. El equipo es profesional y el
+              resultado impecable."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                <img
+                  alt="User avatar"
+                  class="w-full h-full object-cover"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuALCntJFQPlKwKy_Uk5PR7pb1XGj4BANso7gCT5j9Qwhnq8vagccByDuuEPwkTwWSyomon4ItMrdeBfVbNFWMMPQ7vBwPY2b295AbScy8rs5vy7p44HpYEz8AHy1n7M_ZFN3aybcKAS6W7YqwrNRROWh_IE0RMta4B20u6cY4oSX5GSrfJLicj2nkh4jYgDGRSrWUcW5P6F5Q8Ai26Q5jsqRS_5YOzaoNoKatVeKs_r-dNle-k1_Qhl0qczWQQokyO1VLSzOvYuUxY"
+                />
+              </div>
+              <div>
+                <p
+                  class="text-sm font-medium text-text-main-light dark:text-white"
+                >
+                  Diego M.
+                </p>
+                <p
+                  class="text-[10px] text-text-sec-light dark:text-text-sec-dark uppercase tracking-wide"
+                >
+                  Cliente Regular
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-white dark:bg-[#111111] p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-white/5 hover:border-gray-200 dark:hover:border-white/10 transition-all card-lift reveal"
+          >
+            <div class="flex items-center gap-1 text-primary mb-6 text-xs">
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+            </div>
+            <p
+              class="text-text-sec-light dark:text-text-sec-dark text-sm font-light leading-relaxed mb-8"
+            >
+              "La puntualidad y el respeto por mi tiempo es lo que más valoro,
+              además de la calidad. Un servicio verdaderamente premium en la
+              ciudad."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                <img
+                  alt="User avatar"
+                  class="w-full h-full object-cover"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtRSW2V1kDq3E2siqFCk3j079sxXmjEC8ZjpleoVoauG5ZyQO-BF8nKckuwLVAUqi6CLFx6RPaOEGeHhhXkAu2EoGPoKYS8i9x7etSLyJwhFA4QdpvMfbDNUYDcs5OkjqmHB-HElMpdpmW5Od6dNn2kKj4t93eZvdf0XBAs3_6dxcLtazpSA0Mc7fAtB-RoKq3VenzWdDDWpBGI2i-7_GWJAqbwRG7GLeI2FL488qyaX9GkKMx_H8vwxdV6qWmxF2QhwrhmFZlCEw"
+                />
+              </div>
+              <div>
+                <p
+                  class="text-sm font-medium text-text-main-light dark:text-white"
+                >
+                  Fernando R.
+                </p>
+                <p
+                  class="text-[10px] text-text-sec-light dark:text-text-sec-dark uppercase tracking-wide"
+                >
+                  Cliente VIP
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bg-white dark:bg-[#111111] p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-white/5 hover:border-gray-200 dark:hover:border-white/10 transition-all card-lift reveal"
+          >
+            <div class="flex items-center gap-1 text-primary mb-6 text-xs">
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+              <span class="material-symbols-outlined text-sm filled">star</span>
+            </div>
+            <p
+              class="text-text-sec-light dark:text-text-sec-dark text-sm font-light leading-relaxed mb-8"
+            >
+              "El curso de Fundamentals superó mis expectativas. La metodología
+              es clara y muy práctica. Gracias a ellos pude iniciar mi propio
+              camino."
+            </p>
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                <img
+                  alt="User avatar"
+                  class="w-full h-full object-cover"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJDigpYT26rNM4LkWxZ6L5j0YFRjmyBNUd05aXNKkFy35U70apVqPQ3YYHTFQqndnB9MA38BvortyCy9Mty6ri9aacSEPtcnzjJBjAhMwJXpokHTH2qa6cKQyNLwbg_SOqZ-NNa3weMN3WzyJPuBHrMdiBsqKj0UWSK-AsIgheihNs6vgKE01nIbCEDr0tnYITLrKZicVH1bzH1ENhstd-wgEzymRo7PcPnSkoGgOOCYbB5DsRchQhwuJbnYWfhi_zKY3kCFFNVg4"
+                />
+              </div>
+              <div>
+                <p
+                  class="text-sm font-medium text-text-main-light dark:text-white"
+                >
+                  Zohan G.
+                </p>
+                <p
+                  class="text-[10px] text-text-sec-light dark:text-text-sec-dark uppercase tracking-wide"
+                >
+                  Graduado
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UBICACIÓN -->
+    <section
+      class="py-32 bg-background-light dark:bg-background-dark border-t border-gray-100 dark:border-white/5"
+      id="contact"
+    >
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+          <h2
+            class="text-4xl md:text-5xl font-display font-bold text-text-main-light dark:text-white mb-4 tracking-tight"
+          >
+            Encuéntranos en
+            <em class="text-primary not-italic">San Juan del Río</em>
+          </h2>
+          <p
+            class="text-text-sec-light dark:text-text-sec-dark font-light text-lg mt-4 max-w-xl mx-auto"
+          >
+            Visítanos y vive la experiencia Baruuc en persona.
+          </p>
+        </div>
+        <div class="grid lg:grid-cols-5 gap-10 items-start reveal">
+          <!-- Map -->
+          <div
+            class="lg:col-span-3 rounded-3xl overflow-hidden shadow-apple-hover border border-gray-100 dark:border-white/5"
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d570.9116694288646!2d-100.00517596683206!3d20.386312178418443!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d30b00a917c23f%3A0x5a334f7e28a20c1e!2sBaruc%20Barber%20Studio!5e0!3m2!1ses!2smx!4v1770763542043!5m2!1ses!2smx"
+              width="100%"
+              height="450"
+              style="border: 0; display: block"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+          <!-- Info card -->
+          <div
+            class="lg:col-span-2 bg-surface-light dark:bg-surface-dark rounded-3xl p-10 border border-gray-100 dark:border-white/5 gradient-border"
+          >
+            <h3
+              class="text-2xl font-display font-bold text-text-main-light dark:text-white mb-6"
+            >
+              Baruc Barber Studio
+            </h3>
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <span
+                  class="material-symbols-outlined text-primary text-xl mt-0.5"
+                  >location_on</span
+                >
+                <div>
+                  <p
+                    class="text-sm font-medium text-text-main-light dark:text-white mb-1"
+                  >
+                    Dirección
+                  </p>
+                  <p
+                    class="text-sm text-text-sec-light dark:text-text-sec-dark font-light"
+                  >
+                    San Juan del Río,<br />Querétaro, México
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span
+                  class="material-symbols-outlined text-primary text-xl mt-0.5"
+                  >schedule</span
+                >
+                <div>
+                  <p
+                    class="text-sm font-medium text-text-main-light dark:text-white mb-1"
+                  >
+                    Horario
+                  </p>
+                  <p
+                    class="text-sm text-text-sec-light dark:text-text-sec-dark font-light"
+                  >
+                    Lun - Vie: 10am - 8pm<br />Sáb: 10am - 6pm<br />Dom: Cerrado
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span
+                  class="material-symbols-outlined text-primary text-xl mt-0.5"
+                  >call</span
+                >
+                <div>
+                  <p
+                    class="text-sm font-medium text-text-main-light dark:text-white mb-1"
+                  >
+                    Teléfono
+                  </p>
+                  <a
+                    href="tel:+525512345678"
+                    class="text-sm text-text-sec-light dark:text-text-sec-dark font-light hover:text-primary transition-colors"
+                    >+52 55 1234 5678</a
+                  >
+                </div>
+              </div>
+              <a
+                href="https://maps.google.com/?q=Baruc+Barber+Studio+San+Juan+del+Rio"
+                target="_blank"
+                class="mt-4 inline-flex items-center justify-center w-full h-[52px] rounded-full bg-primary hover:bg-primary-dark text-white font-semibold text-sm tracking-wider transition-all duration-300 hover:shadow-glow group"
+              >
+                Cómo llegar
+                <span
+                  class="material-symbols-outlined text-sm ml-2 group-hover:translate-x-1 transition-transform"
+                  >arrow_forward</span
+                >
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer
+      class="bg-background-light dark:bg-black border-t border-gray-200 dark:border-white/10 py-20"
+    >
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-16">
+          <div class="col-span-1 md:col-span-1">
+            <img src="logo.jpg" alt="Baruuc Studio" class="h-10 rounded mb-6" />
+            <p
+              class="text-xs text-text-sec-light dark:text-text-sec-dark leading-relaxed font-light"
+            >
+              Elevando el estándar de la barbería moderna. Un espacio donde la
+              tradición encuentra la innovación.
+            </p>
+          </div>
+          <div>
+            <h4
+              class="text-xs font-semibold text-text-main-light dark:text-white uppercase tracking-widest mb-6"
+            >
+              Navegación
+            </h4>
+            <ul
+              class="space-y-4 text-xs text-text-sec-light dark:text-text-sec-dark font-light"
+            >
+              <li>
+                <a
+                  class="hover:text-black dark:hover:text-white transition-colors"
+                  href="#"
+                  >Servicios</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-black dark:hover:text-white transition-colors"
+                  href="#"
+                  >Academy</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-black dark:hover:text-white transition-colors"
+                  href="#"
+                  >Galería</a
+                >
+              </li>
+              <li>
+                <a
+                  class="hover:text-black dark:hover:text-white transition-colors"
+                  href="#"
+                  >Nosotros</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4
+              class="text-xs font-semibold text-text-main-light dark:text-white uppercase tracking-widest mb-6"
+            >
+              Visítanos
+            </h4>
+            <ul
+              class="space-y-4 text-xs text-text-sec-light dark:text-text-sec-dark font-light"
+            >
+              <li class="flex items-start gap-2">
+                San Juan del Río<br />Querétaro, México
+              </li>
+              <li class="flex items-center gap-2 mt-2">
+                <a
+                  class="hover:text-black dark:hover:text-white transition-colors"
+                  href="tel:+525512345678"
+                  >+52 55 1234 5678</a
+                >
+              </li>
+              <li class="flex items-center gap-2">
+                <a
+                  class="hover:text-black dark:hover:text-white transition-colors"
+                  href="mailto:contacto@baruuc.com"
+                  >contacto@baruuc.com</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4
+              class="text-xs font-semibold text-text-main-light dark:text-white uppercase tracking-widest mb-6"
+            >
+              Horario
+            </h4>
+            <ul
+              class="space-y-4 text-xs text-text-sec-light dark:text-text-sec-dark font-light"
+            >
+              <li class="flex justify-between w-32">
+                <span>Lun - Vie</span> <span>10am - 8pm</span>
+              </li>
+              <li class="flex justify-between w-32">
+                <span>Sáb</span> <span>10am - 6pm</span>
+              </li>
+              <li class="flex justify-between w-32">
+                <span>Dom</span> <span>Cerrado</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-200 dark:border-white/10 mt-16 pt-8 flex flex-col md:flex-row justify-between items-center gap-6"
+        >
+          <p
+            class="text-[10px] text-text-sec-light dark:text-text-sec-dark font-light"
+          >
+            © 2026 Baruuc Barber Studio. Todos los derechos reservados.
+          </p>
+          <div class="flex space-x-6">
+            <a
+              class="text-text-sec-light dark:text-text-sec-dark hover:text-black dark:hover:text-white transition-colors"
+              href="#"
+            >
+              <span class="sr-only">Instagram</span>
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  clip-rule="evenodd"
+                  d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772 4.902 4.902 0 011.772-1.153c.636-.247 1.363-.416 2.427-.465C9.673 2.013 10.03 2 12.48 2h-.165zm-1.8 1.8c-2.403 0-2.7.01-3.665.053-.895.04-1.38.2-1.703.327-.428.165-.733.363-1.053.683-.32.32-.518.625-.683 1.053-.128.322-.288.808-.328 1.703-.043.965-.053 1.262-.053 3.665s.01 2.7.053 3.665c.04.895.2 1.38.328 1.703.165.428.363.733.683 1.053.32.32.625.518 1.053.683.323.128.808.288 1.703.328.965.043 1.262.053 3.665.053s2.7-.01 3.665-.053c.895-.04 1.38-.2 1.703-.328.428-.165.733-.363 1.053-.683.32-.32.518-.625.683-1.053.128-.322.288-.808.328-1.703.043-.965.053-1.262.053-3.665s-.01-2.7-.053-3.665c-.04-.895-.2-1.38-.328-1.703-.165-.428-.363-.733-.683-1.053-.32-.32-.625-.518-1.053-.683-.322-.128-.808-.288-1.703-.328-.965-.043-1.262-.053-3.665-.053zM12 5.833a6.167 6.167 0 110 12.334 6.167 6.167 0 010-12.334zm0 1.8a4.367 4.367 0 100 8.734 4.367 4.367 0 000-8.734zm5.85-2.55a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                  fill-rule="evenodd"
+                ></path>
+              </svg>
+            </a>
+            <a
+              class="text-text-sec-light dark:text-text-sec-dark hover:text-black dark:hover:text-white transition-colors"
+              href="#"
+            >
+              <span class="sr-only">Facebook</span>
+              <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                <path
+                  clip-rule="evenodd"
+                  d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                  fill-rule="evenodd"
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll Reveal Observer -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("visible");
+                observer.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+        );
+        document
+          .querySelectorAll(".reveal")
+          .forEach((el) => observer.observe(el));
+      });
+    </script>
+  </body>
+</html>
